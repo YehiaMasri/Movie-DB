@@ -59,8 +59,13 @@ app.get('/movies/update', (req, res) => {
     res.send('mu')
 })
 
-app.get('/movies/delete', (req, res) => {
-    res.send('md');
+app.get('/movies/delete/id/:ID', (req, res) => {
+    if (req.params.ID >= 0 && req.params.ID < movies.length) {
+        movies.splice(req.params.ID, 1);
+        res.send(movies);
+    } else {
+        res.status(404).send({ status: 404, error: true, message: `The movie ${req.params.ID} does not exist` })
+    }
 })
 
 app.get('/movies/read/:text', (req, res) => {
