@@ -36,8 +36,19 @@ app.get('/search', (req, res) => {
     }
 });
 
-app.get('/movies/create', (req, res) => {
-    res.send("mc");
+app.get('/movies/add/title/:title/&year/:year/&rating/:rating', (req, res) => {
+    if (req.params.title != " " && req.params.year >= 1000 && req.params.rating != 0 && req.params.rating > 0) {
+        if (req.params.rating == " ") {
+            req.params.rating = 4;
+            movies.push(req.params);
+            res.send(movies);
+        } else {
+            movies.push(req.params);
+            res.send(movies);
+        }
+    } else {
+        res.status(403).send({ status: 403, error: true, message: 'you cannot create a movie without providing a title and a year' })
+    }
 });
 
 app.get('/movies/read', (req, res) => {
