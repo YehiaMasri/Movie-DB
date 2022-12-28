@@ -55,10 +55,31 @@ app.get('/movies/read', (req, res) => {
     res.status(200).send({ status: 200, data: movies })
 });
 
-app.get('/movies/update', (req, res) => {
-    res.send('mu')
+app.get('/movies/update/id/:id/title/:title', (req, res) => {
+    if (req.params.id >= 0 && req.params.id < movies.length) {
+        movies[req.params.id].title = req.params.title;
+        res.send(movies);
+    }
 })
 
+app.get('/movies/update/id/:id/title/:title/rating/:rating', (req, res) => {
+    if (req.params.id >= 0 && req.params.id < movies.length) {
+        movies[req.params.id].title = req.params.title;
+        movies[req.params.id].rating = req.params.rating;
+        res.send(movies);
+    }
+})
+
+app.get('/movies/update/id/:id/title/:title/rating/:rating/year/:year', (req, res) => {
+    if (req.params.id >= 0 && req.params.id < movies.length) {
+        movies[req.params.id].title = req.params.title;
+        movies[req.params.id].rating = req.params.rating;
+        movies[req.params.id].year = req.params.year;
+        res.send(movies);
+    }
+})
+
+app.get('/movies/update/id/:id/')
 app.get('/movies/delete/id/:ID', (req, res) => {
     if (req.params.ID >= 0 && req.params.ID < movies.length) {
         movies.splice(req.params.ID, 1);
